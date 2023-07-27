@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="elzero">
+        <h1>Welcome to Vue </h1>
+        <br>
+        <p>welcome {{name }} to see you </p>
+        <p>your age is {{age + ' years'}}</p>
+        <p>your first skills is {{skills[1]}}</p>
+        <p>you are {{isSub ? 'yes' : 'no '}}</p>
+        <p>you r first test is : {{completedTests[0].testResult}}</p>
+        <p>{{date}}</p>
+        <p>{{Calc()}}</p>
+        <button @click="showNewDate">SHow new date </button>
+        <p v-text="'Mr ' + name "></p>
+
+        <p v-html="title"></p>
+        <ul>
+            <li v-for="skill in skills">
+                {{skill}}
+
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(skill, index) in skills">
+                {{index}}=== {{skill}}
+
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(test,index) in completedTests">
+                {{index}}... {{test.testName}} ---{{test.testResult}}
+
+            </li>
+        </ul>
+
+        <p v-if="age > 50 ">you are to old </p>
+        <p v-else-if="age >15 && age <40">you are not to old</p>
+        <p v-else>you are child</p>
+        <p>Welcome {{name2}}</p>
+
+
+        <a v-bind:href="imgUrl" alt="no">
+            <img v-bind:src="imgSrc" v-bind:alt="imgAlt" width="200px">
+        </a>
+        <p>counter is {{counter}}</p>
+        <button v-on:click.right="counter++">click </button>
+        <form action="">
+            <input type="text" name="" v-model:value="name2" placeholder="v-model">
+
+
+        </form>
+        <p>your name is {{name2}}</p>
+
+        <br>
+        <form action="">
+            <input type="text" name="" :value="name2" placeholder="v-bind">
+
+
+            << /form>
+                <p>your name is {{name2}}</p>
+                <app-count :source="source" :url="url"></app-count>
+
+                <br>
+                <app-article v-for="post in posts" :title="post.title" :author="post.author"
+                    :id="post.id"></app-article>
+                <br>
+                <app-article-item></app-article-item>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <localcomp></localcomp>
+                <br>
+
+                <p>{{calaAge}}</p>
+                <p>{{calaAge}}</p>
+                <p>{{calaAge}}</p>
+                <p>{{calaAge}}</p>
+                <p>{{age}}</p>
+
+                <p>{{firstName+ ' ' + lastName}}</p>
+                <br>
+                <p>{{fullName}}</p>
+                <p>{{fullName}}</p>
+                <p>{{fullName}}</p>
+                <p>{{fullName}}</p>
+                <p>{{age}}</p>
+                <br>
+                <label>Search fpr programming</label>
+                <input type="text" value="" name="" v-model="findLang">
+                <ul>
+                    <li v-for="lang in filterLanguages">
+                        {{lang}}
+                    </li>
+                </ul>
+
+                <br>
+                <label for="">write yr user name</label>
+                <input type="text" v-model.lazy="username">
+                <p>{{validateUsername}}</p>
+
+                <br>
+
+                <label for="">Eg pound</label>
+                <input type="text" v-model="eg">
+                
+                
+                <label for="">Sa pound</label>
+                <input type="text" v-model="sar">
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <label for="">Hour</label>
+                <input type="text " v-model="hour">
+                
+                
+                <br><label for="">Minute</label>
+                <input type="text " v-model="minute">
+
+                <br><label for="">second</label>
+                <input type="text " v-model="second">
+
+    </div>
+
+
+
+
+
+    <script src="js/vue.js"></script>
+
+    <script>
+        var localcomp = {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: '<p>local component 2</p>'
+        }
+
+        Vue.component('app-article-item', {
+
+        })
+        Vue.component('app-article', {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            props: ['title', 'author', 'id'],
+            template: '<p>article title is {{title}} and written by {{author}} and has id is {{id}}</p>'
+        })
+
+        Vue.component('app-count', {
+            data: function () {
+                return {
+                    name: 'ahmad',
+                    count: 0
+                }
+            },
+            props: ['source', 'url'],
+            template: '<p @click="count++">Hello {{name}} you click this para  {{count}}  and source is {{source}} and url is {{url}}</p>',
+
+
+        })
+
+        var vm = new Vue({
+            el: '#elzero',
+            data: {
+                hour:0,
+                minute:0,
+                second:0,
+                eg:0,
+                sar:0,
+                username: '',
+                findLang: '',
+                languages: ['html', 'CSS', 'Java', 'PHP', 'javascript'],
+                firstName: 'Basel',
+                lastName: 'Homik',
+                source: 'Elzero Web School',
+                date: 'today',
+                age: 8,
+                skills: ['html', 'CSS', 'JAVA'],
+                isSub: false,
+                title: '<div class="rank">Noob</div>',
+                completedTests: [
+                    {
+                        testName: 'firtst test',
+                        testResult: '80%',
+                    },
+                    {
+                        testName: 'second test',
+                        testResult: '60%',
+                    },
+                    {
+                        testName: 'third test',
+                        testResult: '30%',
+                    },
+                ],
+                name2: 'Osama',
+                imgSrc: 'img.jpg',
+                imgAlt: 'The Alter photo',
+                imgUrl: 'https://www.google.com',
+                message: 'hi basss',
+                counter: 0,
+                url: 'https://www.google.com',
+                posts: [
+                    { id: 1, author: 'Osama', title: 'Article number one' },
+                    { id: 2, author: 'Ahmad ', title: 'Article number twee' },
+                    { id: 3, author: 'Basel', title: 'Article number three' },
+                    { id: 4, author: 'Sana', title: 'Article number one and tweente' },
+                    { id: 5, author: 'Sara', title: ' one and tweente' },
+                ]
+            },
+            components: {
+                'localcomp': localcomp
+            },
+
+            computed: {
+                calaAge: function () {
+                    console.log('run');
+                    return this.message.split('').reverse().join('');
+
+
+                },
+                validateUsername: function () {
+                    if (!this.username) {
+                        return 'username can not be empty';
+
+                    } else if (this.username.length < 8) {
+                        return 'User name is too short';
+
+                    } else if (!isNaN(this.username)) {
+                        return 'username can not be NUMBERS';
+                    } else {
+                        return 'hello username is : ' + this.username + ' is also good ';
+                    }
+
+                },
+                filterLanguages: function () {
+                    var filtering = new RegExp(this.findLang, 'i');
+                    return this.languages.filter(function (el) {
+                        return el.match(filtering);
+                    })
+                },
+
+                fullName: function () {
+                    console.log('run');
+                    return this.firstName + ' ' + this.lastName;
+
+                },
+
+            },
+            methods: {
+                Calc: function () {
+                    return 'your age in days ' + this.age * 365;
+
+                },
+
+
+                showNewDate: function () {
+                    this.date = Date();
+                },
+            },
+            watch: {
+                eg: function(v){
+                    this.sar = v/5;
+                    console.log('eg run');
+                },
+                sar: function(v){
+                    this.eg = v*5;
+                    console.log('SAr run');
+                },
+
+                hour: function(v){
+                    this.minute = v*60;
+                    console.log('run hour');
+                    console.log('---------------');
+                },   
+
+                
+                minute: function(v){
+                    this.hour = v/60;
+                    this.second = v*60;
+                    console.log('run minute');
+                    console.log('---------------');
+                },
+                second: function(v){
+                    this.minute = v/60;
+                    
+                    console.log('run second');
+                    console.log('---------------');
+                },
+             
+
+            },
+        })
+
+    </script>
+</body>
+
+</html>
